@@ -2,11 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
-	<classpathentry exported="true" kind="lib" path="swt.jar" sourcepath="src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://help.eclipse.org/stable/nftopic/org.eclipse.platform.doc.isv/reference/api/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="org.eclipse.swt"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="lib/linux-64-bits/swt-debug.jar"/>
+	<classpathentry kind="lib" path="lib/linux-64-bits/swt.jar"/>
+	<classpathentry kind="lib" path="lib/windows-32-bits/swt-debug.jar"/>
+	<classpathentry kind="lib" path="lib/windows-32-bits/swt.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
