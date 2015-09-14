@@ -5,7 +5,7 @@ import java.util.Hashtable;
 public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la longitud sin consumir el s�mbolo le�do
 
 	
-		public static final Short SI = 258; 
+		public static final Short IF = 258; 
 	    public static final Short ENTONCES = 259;
 	    public static final Short SINO = 260;
 	    public static final Short IMPRIMIR = 261;
@@ -14,7 +14,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
 	    public static final Short DE = 272;
 	    public static final Short ITERAR = 262;
 	    public static final Short HASTA = 263;
-	    public static final Short ENTERO = 257;
+	    public static final Short INT = 257;
 	    public static final Short ID = 264;
 	    
 	    
@@ -35,7 +35,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
         ms = m;
         al = a;
         palabrasReservadas = new Hashtable<String, Short>();
-        palabrasReservadas.put("si", SI); 
+        palabrasReservadas.put("if", IF); 
         palabrasReservadas.put("entonces", ENTONCES);
         palabrasReservadas.put("sino", SINO);
         palabrasReservadas.put("imprimir", IMPRIMIR);
@@ -44,7 +44,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
         palabrasReservadas.put("de", DE);
         palabrasReservadas.put("iterar", ITERAR);
         palabrasReservadas.put("hasta", HASTA);
-        palabrasReservadas.put("entero", ENTERO);
+        palabrasReservadas.put("int", INT);
       
     }
 
