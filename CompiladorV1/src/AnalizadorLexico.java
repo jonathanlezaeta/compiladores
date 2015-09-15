@@ -128,7 +128,7 @@ public class AnalizadorLexico {
 			// as1 as1 as1 as1 as8 as7 as8 as8 as1 as1 as8 as8 as8 as8 as1 as1
 			// as1 as8 as1 as8 as8 as7 as7 as8
 			// 0 1 2 3 4 5 8 9 10 11 12 16 12 23 24 25
-			matrizAS[0][i] = as8;
+		matrizAS[0][i] = as8;
 		matrizAS[0][0] = as1;
 		matrizAS[0][1] = as1;
 		matrizAS[0][2] = as1;
@@ -140,6 +140,7 @@ public class AnalizadorLexico {
 		matrizAS[0][17] = as1;
 		matrizAS[0][18] = as1;
 		matrizAS[0][20] = as1;
+		matrizAS[0][22] = as7;
 		matrizAS[0][23] = as7;
 		matrizAS[0][24] = as7;
 		// matrizAS[0][25] = as7;
@@ -147,14 +148,15 @@ public class AnalizadorLexico {
 		// matrizAS[0][27] = as7;
 		// matrizAS[0][28] = as7;
 		// estado 1
+		
 		for (int i = 0; i <= 24; i++)
-			matrizAS[1][i] = as4;
+		matrizAS[1][i] = as4;
 		matrizAS[1][0] = as2;
 		matrizAS[1][1] = as2;
-		matrizAS[1][2] = as2;
+		matrizAS[1][2] = as4;
 		matrizAS[1][3] = as2;
-		matrizAS[1][4] = as2;
-		matrizAS[1][5] = as2;
+		matrizAS[1][4] = as4;
+		// matrizAS[1][5] = as2;
 		// matrizAS[1][28] = as4;
 		// estado 2
 		for (int i = 0; i <= 24; i++)
@@ -237,61 +239,51 @@ public class AnalizadorLexico {
 				return 0; // Retorna columna de letras
 		if (caracter >= 48 && caracter <= 57)
 			return 1; // Retorna columna de digitos
-		if ((caracter == 'B') || (caracter == 'b'))
+		if ((caracter == 'D') || (caracter == 'd'))
 			return 2;
-		if (caracter == '_')
+		if (caracter == '@')
 			return 3;
-		if (caracter == '$')
-			return 4;
-		if (caracter == '&')
-			return 5;
 		if (caracter == '+')
-			return 6;
+			return 4;
 		if (caracter == '-')
-			return 7;
+			return 5;
 		if (caracter == '/')
-			return 8;
+			return 6;
 		if (caracter == '*')
-			return 9;
+			return 7;
 		if (caracter == '>')
-			return 10;
+			return 8;
 		if (caracter == '<')
-			return 11;
-		if (caracter == '=')
-			return 12;
-		if (caracter == ':')
-			return 13;
-		if (caracter == '^')
-			return 14;
+			return 9;
+		if (caracter == '<') //ACA ESTA MAL SERIA EL DEL 
+			return 10;
 		if (caracter == '(')
-			return 15;
+			return 11;
 		if (caracter == ')')
-			return 16;
-		if (caracter == '[')
-			return 17;
-		if (caracter == ']')
-			return 18;
-		if (caracter == '{')
-			return 19;
-		if (caracter == '}')
-			return 20;
-		if (caracter == ',')
-			return 21;
-		if (caracter == '.')
-			return 22;
-		if (caracter == ';')
-			return 23;
+			return 12;
+		if (caracter == '_')
+			return 13;
+		if (caracter == 'i')
+			return 14;
 		if (caracter == '"')
-			return 24;
-		if ((caracter == 32) || (caracter == 9))
-			return 26; // ESPACIO BLANCO O TABULACION
+			return 15;
+		if (caracter == '.')
+			return 16;
+		if (caracter == ',')
+			return 17;
+		if (caracter == '=')
+			return 18;
+		if (caracter == ';')
+			return 19;
 		if (caracter == '\n')
-			return 27;
+			return 21;
+		if ((caracter == 32) || (caracter == 9))
+			return 22; // ESPACIO BLANCO O TABULACION
 		if (caracter == 255) {
 			eof = true;
-			return 28; // FIN DE ARCHIVO
+			return 23; // FIN DE ARCHIVO
 		}
-		return 25;
+		return 20;
 	}
 
 	public String getMensaje(int nro) {
