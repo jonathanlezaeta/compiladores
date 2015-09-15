@@ -5,17 +5,20 @@ import java.util.Hashtable;
 public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la longitud sin consumir el s�mbolo le�do
 
 	
-		public static final Short SI = 258; 
-	    public static final Short ENTONCES = 259;
-	    public static final Short SINO = 260;
-	    public static final Short IMPRIMIR = 261;
+		public static final Short IF = 258; 
+	    public static final Short THEN = 259;
+	    public static final Short ELSE = 260;
+	    public static final Short PRINT = 261;
 	    public static final Short DOBLE = 266;
-	    public static final Short VECTOR = 273;
-	    public static final Short DE = 272;
-	    public static final Short ITERAR = 262;
-	    public static final Short HASTA = 263;
-	    public static final Short ENTERO = 257;
+	    public static final Short BEGIN = 272;
+	    public static final Short END = 263;
+	    public static final Short ENDIF = 262;	    
+	    public static final Short INT = 257;
 	    public static final Short ID = 264;
+	    public static final Short TODOUBLE = 270;
+	    public static final Short MY = 271;
+	    public static final Short LOOP = 272;
+	    public static final Short UNTIL = 273;
 	    
 	    
 	    private TablaSimbolos ts;
@@ -35,16 +38,19 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
         ms = m;
         al = a;
         palabrasReservadas = new Hashtable<String, Short>();
-        palabrasReservadas.put("si", SI); 
-        palabrasReservadas.put("entonces", ENTONCES);
-        palabrasReservadas.put("sino", SINO);
-        palabrasReservadas.put("imprimir", IMPRIMIR);
+        palabrasReservadas.put("if", IF); 
+        palabrasReservadas.put("then", THEN);
+        palabrasReservadas.put("else", ELSE);
+        palabrasReservadas.put("print", PRINT);
         palabrasReservadas.put("doble", DOBLE);
-        palabrasReservadas.put("vector", VECTOR);
-        palabrasReservadas.put("de", DE);
-        palabrasReservadas.put("iterar", ITERAR);
-        palabrasReservadas.put("hasta", HASTA);
-        palabrasReservadas.put("entero", ENTERO);
+        palabrasReservadas.put("begin", BEGIN);       
+        palabrasReservadas.put("end", END);
+        palabrasReservadas.put("endif", ENDIF);
+        palabrasReservadas.put("int", INT);
+        palabrasReservadas.put("todouble", TODOUBLE);
+        palabrasReservadas.put("my", MY);
+        palabrasReservadas.put("loop", LOOP);
+        palabrasReservadas.put("until", UNTIL);
       
     }
 
