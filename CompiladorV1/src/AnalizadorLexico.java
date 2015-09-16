@@ -286,21 +286,20 @@ public class AnalizadorLexico {
 		return 20;
 	}
 
-	public String getMensaje(int nro) {
 		switch (nro) {
 		// ERRORES LEXICOS
 		case 1:
 			return "Constante double fuera del rango permitido";
 		case 2:
-			return "Car�cter no identificado";
+			return "Carácter no identificado";
 		case 3:
-			return "Construcci�n de token err�neo";
+			return "Construcción erronea del token";
 		case 20:
-			return "Constante entero fuera de rango permitido";
-
+			return "Constante entera fuera de rango permitido";
+	
 			// ERRORES SINTACTICOS
 		case 4:
-			return "No se encontr� el fin de archivo";
+			return "No se encontró el fín de archivo";
 		case 5:
 			return "Falta el bloque de sentencias ejecutables";
 		case 6:
@@ -308,59 +307,55 @@ public class AnalizadorLexico {
 		case 7:
 			return "Se esperaba un ';'";
 		case 8:
-			return "Falta el tipo de la declaraci�n";
+			return "Falta el tipo de la declaración";
 		case 9:
 			return "Sentencia declarativa incorrecta";
 		case 11:
-			return "Falta el identificador de la asignaci�n";
+			return "Falta el identificador de la asignación";
 		case 12:
-			return "Falta el identificador de la asignaci�n y se esperaba un ';'";
+			return "Falta el identificador de la asignación y se esperaba un ';'";
 		case 13:
-			return "Bloque de sentencias sin finalizar falta '}'";
+			return "Bloque de sentencias sin finalizar falta 'END'";
 		case 14:
-			return "Bloque de sentencias sin inicializar falta '{'";
+			return "Bloque de sentencias sin inicializar falta 'BEGIN'";
 		case 15:
-			return "Falta abrir par�ntesis '('";
+			return "Falta abrir paréntesis '('";
 		case 16:
-			return "Falta cerrar par�ntesis ')'";
+			return "Falta cerrar paréntesis ')'";
 		case 17:
-			return "Par�metro del imprimir incorrecto";
+			return "Parámetro del imprimir incorrecto";
 		case 18:
-			return "Falta palabra reservada 'imprimir'";
+			return "Falta palabra reservada 'PRINT'";
 		case 19:
 			return "Sentencia incorrecta";
-
+		case 21:
+			return "Sentencia incorrecta falta palabra reservada 'ENDIF'";
+	
 			// ESTRUCTURAS SINTACTICAS
 		case 30:
 			return "Sentencia declarativa";
 		case 31:
-			return "Sentencia de asignaci�n";
+			return "Sentencia de asignación";
 		case 32:
-			return "Sentencia de selecci�n";
+			return "Sentencia de selección";
 		case 33:
-			return "Sentencia de iteraci�n";
+			return "Sentencia de iteración";
 		case 34:
-			return "Sentencia de impresi�n de caracteres";
+			return "Sentencia de impresión de caracteres";
 		case 35:
 			return "Bloque de sentencias";
+		case 36:
+			return "Sentencia simple";
 		case 37:
-			return "Sentencia declaracion de vector";
+			return "Sentencia de conversión";
 		case 38:
-			return "Falta abrir corchetes '['";
+			return "Ámbito declarado en bloque";
 		case 39:
-			return "Falta cerrar corchetes ']'";
+			return "Falta abrir llaves '{'";
 		case 40:
-			return "Falta declarar los dos puntos ..";
-		case 41:
-			return "Falta agregar el tipo";
-		case 42:
-			return "Falta agregar el tipo 'vector'";
-		case 43:
-			return "Asignacion de vector";
-		case 44:
-			return "Falta agregar la expresion en la asignacion del vector";
+			return "Falta cerrar llaves '}'";
 		case 45:
-			return "Error en el token de asgnacion se espera un ':='";
+			return "Error en el token de asgnación se espera un '='";
 
 		}
 		return null;
