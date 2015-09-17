@@ -71,20 +71,16 @@ public class AnalizadorLexico {
 		this.estado = 0;
 		this.token = new Token();
 		while (estado != -1 && !eof) {
-			if (posicion == codFuente.length()){
-				eof = true;
-			}else{
-				char caracter = codFuente.charAt(posicion);
-				System.out.println(caracter);
-				int simbolo = getColumna(caracter);
-				token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
-				if (!token.consumioCaracter())
-					posicion--;
-				if (caracter == '\n' && token.consumioCaracter())
-					nroLinea++;
-				posicion++;
-				estado = matrizEstados[estado][simbolo];
-			}
+			char caracter = codFuente.charAt(posicion);
+			System.out.println(caracter);
+			int simbolo = getColumna(caracter);
+			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
+			if (!token.consumioCaracter())
+				posicion--;
+			if (caracter == '\n' && token.consumioCaracter())
+				nroLinea++;
+			posicion++;
+			estado = matrizEstados[estado][simbolo];
 		}
 
 		if (eof && !fin) { // Cuando llegamos al final del archivo
@@ -121,7 +117,7 @@ public class AnalizadorLexico {
 
 	private void inicializarAS() {
 
-		matrizAS = new AccionesSemantica[16][26];
+		matrizAS = new AccionesSemantica[15][25];
 		as1 = new As1();
 		as2 = new As2();
 		as3 = new As3(tablaSimb, this, msj);
@@ -149,15 +145,15 @@ public class AnalizadorLexico {
 			matrizAS[0][7] = as8;
 			matrizAS[0][8] = as1;
 			matrizAS[0][9] = as1;
-			matrizAS[0][10] = as1;
+			matrizAS[0][10] = as8;
 			matrizAS[0][11] = as8;
-			matrizAS[0][12] = as8;
+			matrizAS[0][14] = as1;
 			matrizAS[0][15] = as1;
-			matrizAS[0][16] = as1;
+			matrizAS[0][16] = as8;
 			matrizAS[0][17] = as8;
-			matrizAS[0][18] = as8;
+			matrizAS[0][18] = as7;
 			matrizAS[0][19] = as7;
-			matrizAS[0][20] = as7;
+			matrizAS[0][20] = as1;
 			matrizAS[0][21] = as8;
 			matrizAS[0][23] = as7;
 			matrizAS[0][24] = as7;
@@ -170,7 +166,7 @@ public class AnalizadorLexico {
 			matrizAS[1][0] = as2;
 			matrizAS[1][1] = as2;
 			matrizAS[1][3] = as2;
-						
+			
 		// estado 2
 		for (int i = 0; i <= 25; i++)
 			matrizAS[2][i] = as11;
@@ -183,7 +179,7 @@ public class AnalizadorLexico {
 			matrizAS[3][2] = as2;
 			matrizAS[3][12] = as2;
 			matrizAS[3][15] = as2;
-			
+
 		// estado 4
 		for (int i = 0; i <= 25; i++)
 			matrizAS[4][i] = as11;
@@ -198,12 +194,11 @@ public class AnalizadorLexico {
 		for (int i = 0; i <= 25; i++)
 			matrizAS[6][i] = as6;
 			matrizAS[6][0] = as2;
-			matrizAS[6][1] = as5;			
-			
+			matrizAS[6][1] = as5;
+
 		// estado 7
 		for (int i = 0; i <= 25; i++)
 			matrizAS[7][i] = as11;
-			matrizAS[7][1] = as2;
 			matrizAS[7][4] = as2;
 			matrizAS[7][5] = as2;
 
@@ -220,7 +215,7 @@ public class AnalizadorLexico {
 		// estado 10
 		for (int i = 0; i <= 25; i++)
 			matrizAS[10][i] = as6	;
-			matrizAS[10][10] = as5;
+			matrizAS[10][20] = as5;
 
 		// estado 11
 		for (int i = 0; i <= 25; i++)
