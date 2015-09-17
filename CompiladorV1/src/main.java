@@ -65,7 +65,7 @@ public class main implements Mensajes{
 	        fd.setFilterExtensions(filterExt);
 	        String archivo = fd.open();
 	        String linea;
-	        String codigoCompleto = null;
+	        String codigoCompleto = "";
 	        try{
 		        FileReader f = new FileReader(archivo);
 		        BufferedReader b = new BufferedReader(f);
@@ -178,7 +178,7 @@ public class main implements Mensajes{
 	  protected void analizar(String codigoFuente) {
 		  AnalizadorLexico anlLexico = new AnalizadorLexico(codigoFuente, this);
 		  System.out.println(codigoFuente);
-		  for (int i = 0; i < 50; i++) {
+		  for (int i = 0; i < codigoFuente.length(); i++) {
 			  System.out.println(anlLexico.yylex());
 		  }
 	  }
