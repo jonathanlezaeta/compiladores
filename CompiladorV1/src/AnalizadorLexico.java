@@ -15,36 +15,45 @@ public class AnalizadorLexico {
 			as10, as11, as12, as13; // acciones semanticas
 	private boolean eof; // booleana que indica si se lleg� al final del archivo
 	private boolean fin;
-	// | c | d | "d"-"D" | @ | + | - | / | * | > | < | <> | = | ( | ) | { | } |
-	// _ | i | " | . | , | ; | otro | /n | tab | EOF
+		 // | c | d | "d"-"D" | @ | + | - | / | * | > | < | = | ( | ) | _ | i | { | } | " | . | , | ; | otro | /n | tab | EOF
 	private int[][] matrizEstados = {
-			{ 1, 3, 1, 1, -1, 8, -1, -1, 2, 2, -1, -1, -1, -1, -1, -1, 1, 11,
-					4, -1, -1, 0, 0, 0, 0 }, // estado 0
-			{ 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1 }, // estado 1
-			{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 }, // estado 2
-			{ -1, 3, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 10, -1,
-					-1, 4, -1, -1, -1, -1, -1, -1 }, // estado 3
-			{ -1, 4, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1 }, // estado 4
-			{ -1, 7, -1, -1, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1 }, // estado 5
-			{ -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 }, // estado 6
-			{ -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 }, // estado 7
-			{ -1, -1, -1, -1, -1, -1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 }, // estado 8
-			{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
-					-1, 9, -1 }, // estado 9
-			{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 }, // estado 10
-			{ 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-					11, -1, 11, 11, 11, 11, 11, 11, -1 }, // estado 11
-			{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-					-1, -1, -1, -1, -1, -1, -1, -1, -1 } }; // estado 12
+			{ 1, 3, 1, 2,-1,14,-1,-1,10,10,10,-1,-1,-1,-1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
+			{ 1, 1, 1, 2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 1
+			{ 1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 2
+			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
+			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },   // estado 4
+			{-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 5
+			{-1, 6, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 6
+			{-1, 9,-1,-1, 8, 8,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 7
+			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 8
+			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 9
+			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 10
+			{11, 1,11,11,11,11,11,11,11,11,11,11,11,11,11,13,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
+			{-1,-1,-1,-1,-1,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 12
+			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
+			{-1,-1,-1,-1,-1,15,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 14
+			{15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15, 0,15,15 },}; // estado 15
+	
 
+//		    1	3	1	2	f	14	f	f	10	10	10	f	f	f	f	11	5	f	f	f	0	f	f	0	0	0  ESTADO 0
+//	        1	1	1	2	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 1
+//	        1	f	1	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 2
+//          f	3	7	f	f	f	f	f	f	f	f	f	f	4	f	f	6	f	f	f	f	f	f	f	f	f  ESTADO 3
+//		    f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 4
+//			f	6	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 5
+//			f	6	7	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 6	
+//			f	9	f	f	8	8	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 7	
+//			f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 8	
+//			f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 9
+//			f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 10 
+//			11	11	11	11	11	11	11	11	11	11	11	11	11	11	11	13	11	11	11	11	11	11	11	12	11	11 ESTADO 11
+//			f	f	f	f	f	11	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 12
+//			f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 13
+//			f	f	f	f	f	15	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 14 	
+//			15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	0	15	15 ESTADO 15
+
+	
+	
 	private AccionesSemantica[][] matrizAS;
 
 	public AnalizadorLexico(String cf, Mensajes m) {
@@ -108,7 +117,7 @@ public class AnalizadorLexico {
 
 	private void inicializarAS() {
 
-		matrizAS = new AccionesSemantica[14][25];
+		matrizAS = new AccionesSemantica[15][25];
 		as1 = new As1();
 		as2 = new As2();
 		as3 = new As3(tablaSimb, this, msj);
@@ -124,108 +133,111 @@ public class AnalizadorLexico {
 		as13 = new As13(tablaSimb, this, msj);
 
 		// Estado 0
-		for (int i = 0; i <= 24; i++)
-			// as1 as1 as1 as1 as8 as7 as8 as8 as1 as1 as8 as8 as8 as8 as1 as1
-			// as1 as8 as1 as8 as8 as7 as7 as8
-			// 0 1 2 3 4 5 8 9 10 11 12 16 12 23 24 25
-		matrizAS[0][i] = as8;
-		matrizAS[0][0] = as1;
-		matrizAS[0][1] = as1;
-		matrizAS[0][2] = as1;
-		matrizAS[0][3] = as1;
-		matrizAS[0][5] = as7;
-		matrizAS[0][10] = as1;
-		matrizAS[0][11] = as1;
-		matrizAS[0][16] = as1;
-		matrizAS[0][17] = as1;
-		matrizAS[0][18] = as1;
-		matrizAS[0][20] = as1;
-		matrizAS[0][22] = as7;
-		matrizAS[0][23] = as7;
-		matrizAS[0][24] = as7;
-		// matrizAS[0][25] = as7;
-		// matrizAS[0][26] = as7;
-		// matrizAS[0][27] = as7;
-		// matrizAS[0][28] = as7;
-		// estado 1
+		for (int i = 0; i <= 25; i++)
+			matrizAS[0][i] = as11;
+			matrizAS[0][0] = as1;
+			matrizAS[0][1] = as1;
+			matrizAS[0][2] = as1;
+			matrizAS[0][3] = as1;
+			matrizAS[0][4] = as8;
+			matrizAS[0][5] = as7;
+			matrizAS[0][6] = as8;
+			matrizAS[0][7] = as8;
+			matrizAS[0][8] = as1;
+			matrizAS[0][9] = as1;
+			matrizAS[0][10] = as8;
+			matrizAS[0][11] = as8;
+			matrizAS[0][14] = as1;
+			matrizAS[0][15] = as1;
+			matrizAS[0][16] = as8;
+			matrizAS[0][17] = as8;
+			matrizAS[0][18] = as7;
+			matrizAS[0][19] = as7;
+			matrizAS[0][20] = as1;
+			matrizAS[0][21] = as8;
+			matrizAS[0][23] = as7;
+			matrizAS[0][24] = as7;
+			matrizAS[0][25] = as8;
 		
-		for (int i = 0; i <= 24; i++)
-		matrizAS[1][i] = as4;
-		matrizAS[1][0] = as2;
-		matrizAS[1][1] = as2;
-		matrizAS[1][2] = as4;
-		matrizAS[1][3] = as2;
-		matrizAS[1][4] = as4;
-		// matrizAS[1][5] = as2;
-		// matrizAS[1][28] = as4;
+		//Estado 1
+		
+		for (int i = 0; i <= 25; i++)
+			matrizAS[1][i] = as4;
+			matrizAS[1][0] = as2;
+			matrizAS[1][1] = as2;
+			matrizAS[1][3] = as2;
+			
 		// estado 2
-		for (int i = 0; i <= 24; i++)
-			matrizAS[2][i] = as13;
-		matrizAS[2][1] = as2;
-		matrizAS[2][2] = as2;
-		matrizAS[2][22] = as2;
-		// matrizAS[2][28] = as13;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[2][i] = as11;
+			matrizAS[2][0] = as2;
 
 		// estado 3
-		for (int i = 0; i <= 24; i++)
+		for (int i = 0; i <= 25; i++)
 			matrizAS[3][i] = as11;
-		matrizAS[3][12] = as5;
+			matrizAS[3][1] = as2;
+			matrizAS[3][2] = as2;
+			matrizAS[3][12] = as2;
+			matrizAS[3][15] = as2;
 
 		// estado 4
-		for (int i = 0; i <= 24; i++)
-			matrizAS[4][i] = as6;
-		matrizAS[4][12] = as5;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[4][i] = as11;
+			matrizAS[4][13] = as5;
 
 		// estado 5
-		for (int i = 0; i <= 24; i++)
-			matrizAS[5][i] = as2;
-		matrizAS[5][24] = as9;
-		// matrizAS[5][27] = as11;
-		// matrizAS[5][28] = as11;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[5][i] = as11;
+			matrizAS[5][1] = as2;
 
 		// estado 6
-		for (int i = 0; i <= 24; i++)
-			matrizAS[6][i] = as11;
-		matrizAS[6][1] = as2;
-		matrizAS[6][22] = as5;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[6][i] = as6;
+			matrizAS[6][0] = as2;
+			matrizAS[6][1] = as5;
 
 		// estado 7
-		for (int i = 0; i <= 24; i++)
-			matrizAS[7][i] = as3;
-		matrizAS[7][1] = as2;
-		matrizAS[7][2] = as2;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[7][i] = as11;
+			matrizAS[7][4] = as2;
+			matrizAS[7][5] = as2;
 
 		// estado 8
-		for (int i = 0; i <= 24; i++)
-			matrizAS[8][i] = as12;
-		matrizAS[8][1] = as2;
-		matrizAS[8][6] = as2;
-		matrizAS[8][7] = as2;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[8][i] = as11;
+			matrizAS[8][1] = as2;
 
 		// estado 9
-		for (int i = 0; i <= 24; i++)
-			matrizAS[9][i] = as11;
-		matrizAS[9][1] = as2;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[9][i] = as3;
+			matrizAS[9][1] = as2;
 
 		// estado 10
-		for (int i = 0; i <= 24; i++)
-			matrizAS[10][i] = as3;
-		matrizAS[10][1] = as2;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[10][i] = as6	;
+			matrizAS[10][20] = as5;
 
 		// estado 11
-		for (int i = 0; i <= 24; i++)
-			matrizAS[11][i] = as6;
-		matrizAS[11][7] = as10;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[11][i] = as2;
 
 		// estado 12
-		for (int i = 0; i <= 24; i++)
-			matrizAS[12][i] = as7;
-		// matrizAS[12][28] = as11;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[12][i] = as11;
+			matrizAS[12][5] = as2;
 
 		// estado 13
-		for (int i = 0; i <= 24; i++)
-			matrizAS[13][i] = as7;
-		// matrizAS[13][28] = as11;
+		for (int i = 0; i <= 25; i++)
+			matrizAS[13][i] = as6;
+				
+		// estado 14
+		for (int i = 0; i <= 25; i++)
+			matrizAS[14][i] = as7;
+				
+		// estado 15
+		for (int i = 0; i <= 25; i++)
+			matrizAS[15][i] = as7;
+				
 	}
 
 	private int getColumna(int caracter) { // obtiene la columna en la que est�
@@ -234,7 +246,7 @@ public class AnalizadorLexico {
 		// comprueba que llegue una letra
 		if ((caracter >= 65 && caracter <= 90)
 				|| (caracter >= 97 && caracter <= 122))
-			if ((caracter != 'B') && (caracter != 'b')) // B o b se trata en
+			if ((caracter != 'D') && (caracter != 'd')) // B o b se trata en
 														// otra columna
 				return 0; // Retorna columna de letras
 		if (caracter >= 48 && caracter <= 57)
@@ -255,7 +267,7 @@ public class AnalizadorLexico {
 			return 8;
 		if (caracter == '<')
 			return 9;
-		if (caracter == '<') //ACA ESTA MAL SERIA EL DEL 
+		if (caracter == '=') 
 			return 10;
 		if (caracter == '(')
 			return 11;
@@ -271,19 +283,23 @@ public class AnalizadorLexico {
 			return 16;
 		if (caracter == ',')
 			return 17;
-		if (caracter == '=')
+		if (caracter == '{')
 			return 18;
-		if (caracter == ';')
+		if (caracter == '}')
 			return 19;
+		if (caracter == 32)
+			return 20; // ESPACIO BLANCO 
+		if (caracter == ';')
+			return 21;	
 		if (caracter == '\n')
-			return 21;
-		if ((caracter == 32) || (caracter == 9))
-			return 22; // ESPACIO BLANCO O TABULACION
+			return 23;			
+		if (caracter == 9)
+			return 24;					
 		if (caracter == 255) {
 			eof = true;
-			return 23; // FIN DE ARCHIVO
+			return 25; // FIN DE ARCHIVO
 		}
-		return 20;
+		return 22;	
 	}
 
 	public String getMensaje(int nro) {
