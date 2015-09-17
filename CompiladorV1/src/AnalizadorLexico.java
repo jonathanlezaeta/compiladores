@@ -39,6 +39,7 @@ public class AnalizadorLexico {
 //	        1	f	1	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 2
 //          f	3	7	f	f	f	f	f	f	f	f	f	f	4	f	f	6	f	f	f	f	f	f	f	f	f  ESTADO 3
 //		    f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 4
+	
 //			f	6	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 5
 //			f	6	7	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 6
 //			f	9	f	f	8	8	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 7
