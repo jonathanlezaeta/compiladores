@@ -9,7 +9,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
 	    public static final Short THEN = 259;
 	    public static final Short ELSE = 260;
 	    public static final Short PRINT = 261;
-	    public static final Short DOBLE = 266;
+	    public static final Short DOUBLE = 266;
 	    public static final Short BEGIN = 272;
 	    public static final Short END = 263;
 	    public static final Short ENDIF = 262;	    
@@ -42,7 +42,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
         palabrasReservadas.put("then", THEN);
         palabrasReservadas.put("else", ELSE);
         palabrasReservadas.put("print", PRINT);
-        palabrasReservadas.put("doble", DOBLE);
+        palabrasReservadas.put("double", DOUBLE);
         palabrasReservadas.put("begin", BEGIN);       
         palabrasReservadas.put("end", END);
         palabrasReservadas.put("endif", ENDIF);

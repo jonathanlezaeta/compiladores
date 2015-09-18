@@ -110,7 +110,7 @@ public class main implements Mensajes{
 	    tbtmCodigoFuente.setText("Codigo Fuente");
 	    
 	    //Text area donde se carga el codigo fuente
-	    codigoFuente = new Text(tabFolder,SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+	    codigoFuente = new Text(tabFolder,SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 	    tbtmCodigoFuente.setControl(codigoFuente);
 	    
 	    TabItem tbtmTablaDeSimbolos = new TabItem(tabFolder, SWT.NONE);
