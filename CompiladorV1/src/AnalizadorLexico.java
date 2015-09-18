@@ -71,16 +71,20 @@ public class AnalizadorLexico {
 		this.estado = 0;
 		this.token = new Token();
 		while (estado != -1 && !eof) {
-			char caracter = codFuente.charAt(posicion);
-			System.out.println(caracter);
-			int simbolo = getColumna(caracter);
-			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
-			if (!token.consumioCaracter())
-				posicion--;
-			if (caracter == '\n' && token.consumioCaracter())
-				nroLinea++;
-			posicion++;
-			estado = matrizEstados[estado][simbolo];
+			if (posicion == codFuente.length()){
+				eof = true;
+			}else{
+				char caracter = codFuente.charAt(posicion);
+				System.out.println(caracter);
+				int simbolo = getColumna(caracter);
+				token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
+				if (!token.consumioCaracter())
+					posicion--;
+				if (caracter == '\n' && token.consumioCaracter())
+					nroLinea++;
+				posicion++;
+				estado = matrizEstados[estado][simbolo];
+			}
 		}
 
 		if (eof && !fin) { // Cuando llegamos al final del archivo
