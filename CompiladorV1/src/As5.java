@@ -17,7 +17,7 @@ public class As5 extends AccionesSemantica { // Adiciona el simbolo leido y empa
         simbolos = new Hashtable<String, Short>(); 
         simbolos.put(">=", COMPARADOR);
         simbolos.put("<=", COMPARADOR);
-        simbolos.put("^=", COMPARADOR);
+        simbolos.put("==", COMPARADOR);
         simbolos.put("=", ASIGNACION);
         
     }
