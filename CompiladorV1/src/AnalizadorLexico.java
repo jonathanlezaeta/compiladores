@@ -70,21 +70,24 @@ public class AnalizadorLexico {
 	public int yylex() { // devuelve el ID del token pedido por el parser
 		this.estado = 0;
 		this.token = new Token();
+		char caracter;
 		while (estado != -1 && !eof) {
 			if (posicion == codFuente.length()){
 				eof = true;
+				System.out.println("voy con EOF");		
+			    caracter = '\u00A0';
 			}else{
-				char caracter = codFuente.charAt(posicion);
+			    caracter = codFuente.charAt(posicion);
 				System.out.println(caracter);
-				int simbolo = getColumna(caracter);
-				token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
-				if (!token.consumioCaracter())
-					posicion--;
-				if (caracter == '\n' && token.consumioCaracter())
-					nroLinea++;
-				posicion++;
-				estado = matrizEstados[estado][simbolo];
 			}
+			int simbolo = getColumna(caracter);
+			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
+			if (!token.consumioCaracter())
+				posicion--;
+			if (caracter == '\n' && token.consumioCaracter())
+				nroLinea++;
+			posicion++;
+			estado = matrizEstados[estado][simbolo];			
 		}
 
 		if (eof && !fin) { // Cuando llegamos al final del archivo
@@ -121,7 +124,7 @@ public class AnalizadorLexico {
 
 	private void inicializarAS() {
 
-		matrizAS = new AccionesSemantica[15][25];
+		matrizAS = new AccionesSemantica[16][26];
 		as1 = new As1();
 		as2 = new As2();
 		as3 = new As3(tablaSimb, this, msj);
@@ -169,12 +172,14 @@ public class AnalizadorLexico {
 			matrizAS[1][i] = as4;
 			matrizAS[1][0] = as2;
 			matrizAS[1][1] = as2;
+			matrizAS[1][2] = as2;
 			matrizAS[1][3] = as2;
 			
 		// estado 2
 		for (int i = 0; i <= 25; i++)
 			matrizAS[2][i] = as11;
 			matrizAS[2][0] = as2;
+			matrizAS[2][2] = as2;
 
 		// estado 3
 		for (int i = 0; i <= 25; i++)
