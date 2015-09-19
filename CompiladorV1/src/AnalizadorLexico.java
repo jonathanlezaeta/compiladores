@@ -89,16 +89,16 @@ public class AnalizadorLexico {
 			posicion++;
 			estado = matrizEstados[estado][simbolo];			
 		}
-
-		if (eof && !fin) { // Cuando llegamos al final del archivo
-			msj.tablaDeSimbolos();
-			fin = true;
-			return FIN; // Primero devolvemos el "FIN"
+		if(estado != -1){
+			if (eof && !fin) { // Cuando llegamos al final del archivo
+				msj.tablaDeSimbolos();
+				fin = true;
+				return FIN; // Primero devolvemos el "FIN"
+			}
+	
+			if (eof && fin) // Cuando llegamos al final del archivo
+				return 0; // Luego de devolver el "FIN" devolvemos el "0"
 		}
-
-		if (eof && fin) // Cuando llegamos al final del archivo
-			return 0; // Luego de devolver el "FIN" devolvemos el "0"
-
 		return token.getId().intValue();
 	}
 
