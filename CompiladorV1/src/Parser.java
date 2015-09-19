@@ -17,13 +17,10 @@
 
 
 //#line 2 "GramaticaSinErrores.y"
-package compilador;
+package src;
 import java.util.Vector;
 import java.util.Enumeration;
 //#line 21 "Parser.java"
-
-
-
 
 public class Parser
 {
