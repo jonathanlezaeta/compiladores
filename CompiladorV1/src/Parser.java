@@ -566,10 +566,10 @@ case 4:
 {manejador.estructuraSintactica(analizador.getNroLinea(), analizador.getMensaje(30));
 					Enumeration e = ((Vector<Token>)val_peek(1).obj).elements();
 					while (e.hasMoreElements()){
-					  Token token = (Token)e.nextElement();
-					  if (token.getETS().getTipo() == null){
-						token.getETS().setTipo(token.getTipo());
-					  }
+					  Token token = (Token) e.nextElement();
+					  if(token.getETS().getTipo() == null){
+						  token.getETS().setTipo(token.getTipo());
+					  }
 					}
 					}
 break;
@@ -626,10 +626,10 @@ case 32:
 {manejador.estructuraSintactica(analizador.getNroLinea(), analizador.getMensaje(30));
 					Enumeration e = ((Vector<Token>)val_peek(1).obj).elements();
 					while (e.hasMoreElements()){
-					  Token token = (Token)e.nextElement();
-					  if (token.getETS().getTipo() == null){
+					  Token token = (Token) e.nextElement();
+					  if (token.getETS().getTipo() == null){
 						token.getETS().setTipo(token.getTipo());
-					  }
+					  }
 					}
 					}
 break;

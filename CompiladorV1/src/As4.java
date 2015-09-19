@@ -10,15 +10,15 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
 	    public static final Short ELSE = 260;
 	    public static final Short PRINT = 261;
 	    public static final Short DOUBLE = 266;
-	    public static final Short BEGIN = 272;
-	    public static final Short END = 263;
-	    public static final Short ENDIF = 262;	    
+	    public static final Short BEGIN = 273;
+	    public static final Short END = 270;
+	    public static final Short ENDIF = 272;	    
 	    public static final Short INT = 257;
 	    public static final Short ID = 264;
-	    public static final Short TODOUBLE = 270;
-	    public static final Short MY = 271;
-	    public static final Short LOOP = 272;
-	    public static final Short UNTIL = 273;
+	    public static final Short TODOUBLE = 275;
+	    public static final Short MY = 274;
+	    public static final Short LOOP = 262;
+	    public static final Short UNTIL = 263;
 	    
 	    
 	    private TablaSimbolos ts;
@@ -27,7 +27,7 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
 	    private Hashtable<String, Short> palabrasReservadas;
 
 	    private void verificarLongitudString(Token token) { // si pasa el limite lo trunca y warning 
-		if (token.getLongitud() > 12) {
+		if (token.getLongitud() > 15) {
 	            ms.warning("L�nea " + al.getNroLinea() + ": El identificador '" + token.getLexema() + "' ha sido truncado"); 
 	            token.truncarId();
 		}

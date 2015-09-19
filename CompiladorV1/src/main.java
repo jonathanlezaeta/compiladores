@@ -177,14 +177,14 @@ public class main implements Mensajes{
 	  
 	  protected void analizar(String codigoFuente) {
 		  AnalizadorLexico anlLexico = new AnalizadorLexico(codigoFuente, this);
-//		  System.out.println(codigoFuente);
-//		  for (int i = 0; i < codigoFuente.length(); i++) {
-//			  System.out.println(anlLexico.yylex());
-//		  }
-	        Parser analizadorSintactico = new Parser();
-	        analizadorSintactico.setLexico(anlLexico);
-	        analizadorSintactico.setMensajes(this);
-	        analizadorSintactico.run();
+		  System.out.println(codigoFuente);
+		  for (int i = 0; i < codigoFuente.length(); i++) {
+			  System.out.println(anlLexico.yylex());
+		  }
+//	        Parser analizadorSintactico = new Parser();
+//	        analizadorSintactico.setLexico(anlLexico);
+//	        analizadorSintactico.setMensajes(this);
+//	        analizadorSintactico.run();
 	  }
 	  
 	//----------------------------------------------------------Inicializa el compilador----------------------------------------------------------

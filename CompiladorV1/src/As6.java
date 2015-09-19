@@ -6,6 +6,7 @@ public class As6 extends AccionesSemantica { //  Empaqueta el token sin adiciona
 
 
     public static final Short COMPARADOR = 268;
+    public static final Short ASIGNACION = 269;
     
     private Mensajes ms;
     private AnalizadorLexico al;
@@ -18,6 +19,7 @@ public class As6 extends AccionesSemantica { //  Empaqueta el token sin adiciona
         simbolos.put("[", new Short((short)'['));
         simbolos.put("<", COMPARADOR);
         simbolos.put(">", COMPARADOR);
+        simbolos.put("=", ASIGNACION);
     }
 
     public Token ejecutar(Token token, char c) {
