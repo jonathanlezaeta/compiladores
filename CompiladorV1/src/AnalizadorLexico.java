@@ -1,7 +1,7 @@
 package src;
 
 public class AnalizadorLexico {
-	public static final int FIN = 270;
+	public static final int FIN = 276;
 
 	private int nroLinea; // numero de linea
 	private String codFuente; // codigo fuente tomado del panel de texto grafica
@@ -71,16 +71,19 @@ public class AnalizadorLexico {
 		this.estado = 0;
 		this.token = new Token();
 		char caracter;
+		int simbolo;
 		while (estado != -1 && !eof) {
 			if (posicion == codFuente.length()){
 				eof = true;
 				System.out.println("voy con EOF");		
 			    caracter = '\u00A0';
+			    simbolo = 25;
 			}else{
 			    caracter = codFuente.charAt(posicion);
 				System.out.println(caracter);
+				simbolo = getColumna(caracter);
 			}
-			int simbolo = getColumna(caracter);
+			
 			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
 			if (!token.consumioCaracter())
 				posicion--;
@@ -152,7 +155,7 @@ public class AnalizadorLexico {
 			matrizAS[0][7] = as8;
 			matrizAS[0][8] = as1;
 			matrizAS[0][9] = as1;
-			matrizAS[0][10] = as8;
+			matrizAS[0][10] = as1;
 			matrizAS[0][11] = as8;
 			matrizAS[0][14] = as1;
 			matrizAS[0][15] = as1;
@@ -160,11 +163,11 @@ public class AnalizadorLexico {
 			matrizAS[0][17] = as8;
 			matrizAS[0][18] = as7;
 			matrizAS[0][19] = as7;
-			matrizAS[0][20] = as1;
+			matrizAS[0][20] = as7;
 			matrizAS[0][21] = as8;
 			matrizAS[0][23] = as7;
 			matrizAS[0][24] = as7;
-			matrizAS[0][25] = as8;
+			matrizAS[0][25] = as7;
 		
 		//Estado 1
 		
@@ -224,7 +227,7 @@ public class AnalizadorLexico {
 		// estado 10
 		for (int i = 0; i <= 25; i++)
 			matrizAS[10][i] = as6	;
-			matrizAS[10][20] = as5;
+			matrizAS[10][20] = as6;
 
 		// estado 11
 		for (int i = 0; i <= 25; i++)

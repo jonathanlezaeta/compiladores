@@ -181,6 +181,10 @@ public class main implements Mensajes{
 		  for (int i = 0; i < codigoFuente.length(); i++) {
 			  System.out.println(anlLexico.yylex());
 		  }
+//	        Parser analizadorSintactico = new Parser();
+//	        analizadorSintactico.setLexico(anlLexico);
+//	        analizadorSintactico.setMensajes(this);
+//	        analizadorSintactico.run();
 	  }
 	  
 	//----------------------------------------------------------Inicializa el compilador----------------------------------------------------------
