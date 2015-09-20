@@ -17,7 +17,6 @@ public class As8 extends AccionesSemantica { //Inicializa un token, adiciona el 
 	        simbolos.put("-", new Short((short)'-'));
 	        simbolos.put("*", new Short((short)'*'));
 	        simbolos.put("/", new Short((short)'/'));
-	        simbolos.put("]", new Short((short)']'));
 	        simbolos.put(",", new Short((short)','));
 	        simbolos.put(";", new Short((short)';'));
 	        simbolos.put(")", new Short((short)')'));

@@ -17,7 +17,7 @@ public class AnalizadorLexico {
 	private boolean fin;
 		 // | c | d | "d"-"D" | @ | + | - | / | * | > | < | = | ( | ) | _ | i | { | } | " | . | , | ; | otro | /n | tab | EOF
 	private int[][] matrizEstados = {
-			{ 1, 3, 1, 2,-1,14,-1,-1,10,10,10,-1,-1,-1,-1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
+			{ 1, 3, 1, 2,-1,14,-1,-1,10,10,10,-1,-1,-1, 1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
 			{ 1, 1, 1, 2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 1
 			{ 1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 2
 			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
@@ -28,11 +28,10 @@ public class AnalizadorLexico {
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 8
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 9
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 10
-			{11, 1,11,11,11,11,11,11,11,11,11,11,11,11,11,13,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
+			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11, 0,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
 			{-1,-1,-1,-1,-1,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 12
-			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
-			{-1,-1,-1,-1,-1,15,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 14
-			{15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15, 0,15,15 },}; // estado 15
+			{-1,-1,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
+			{14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14, 0,14,14 },}; // estado 14
 	
 
 //		    1	3	1	2	f	14	f	f	10	10	10	f	f	f	f	11	5	f	f	f	0	f	f	0	0	0  ESTADO 0
@@ -75,12 +74,12 @@ public class AnalizadorLexico {
 		while (estado != -1 && !eof) {
 			if (posicion == codFuente.length()){
 				eof = true;
-				System.out.println("voy con EOF");		
+				//System.out.println("voy con EOF");		
 			    caracter = '\u00A0';
 			    simbolo = 25;
 			}else{
 			    caracter = codFuente.charAt(posicion);
-				System.out.println(caracter);
+				//System.out.println(caracter);
 				simbolo = getColumna(caracter);
 			}
 			
@@ -127,7 +126,7 @@ public class AnalizadorLexico {
 
 	private void inicializarAS() {
 
-		matrizAS = new AccionesSemantica[16][26];
+		matrizAS = new AccionesSemantica[15][26];
 		as1 = new As1();
 		as2 = new As2();
 		as3 = new As3(tablaSimb, this, msj);
@@ -157,6 +156,7 @@ public class AnalizadorLexico {
 			matrizAS[0][9] = as1;
 			matrizAS[0][10] = as1;
 			matrizAS[0][11] = as8;
+			matrizAS[0][12] = as8;
 			matrizAS[0][14] = as1;
 			matrizAS[0][15] = as1;
 			matrizAS[0][16] = as8;
@@ -231,24 +231,20 @@ public class AnalizadorLexico {
 
 		// estado 11
 		for (int i = 0; i <= 25; i++)
-			matrizAS[11][i] = as2;
+			matrizAS[11][i] = as7;
 
 		// estado 12
 		for (int i = 0; i <= 25; i++)
 			matrizAS[12][i] = as11;
-			matrizAS[12][5] = as2;
+			matrizAS[12][5] = as7;
 
 		// estado 13
 		for (int i = 0; i <= 25; i++)
-			matrizAS[13][i] = as6;
+			matrizAS[13][i] = as7;
 				
 		// estado 14
 		for (int i = 0; i <= 25; i++)
 			matrizAS[14][i] = as7;
-				
-		// estado 15
-		for (int i = 0; i <= 25; i++)
-			matrizAS[15][i] = as7;
 				
 	}
 
