@@ -20,7 +20,7 @@ public class AnalizadorLexico {
 			{ 1, 3, 1, 2,-1,14,-1,-1,10,10,10,-1,-1,-1, 1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
 			{ 1, 1, 1, 2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 1
 			{ 1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 2
-			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
+			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },   // estado 4
 			{-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 5
 			{-1, 6, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 6
@@ -74,12 +74,12 @@ public class AnalizadorLexico {
 		while (estado != -1 && !eof) {
 			if (posicion == codFuente.length()){
 				eof = true;
-				//System.out.println("voy con EOF");		
+				System.out.println("voy con EOF");		
 			    caracter = '\u00A0';
-			    simbolo = 25;
+			    simbolo = getColumna(caracter);
 			}else{
 			    caracter = codFuente.charAt(posicion);
-				//System.out.println(caracter);
+				System.out.println(caracter);
 				simbolo = getColumna(caracter);
 			}
 			
@@ -189,13 +189,13 @@ public class AnalizadorLexico {
 			matrizAS[3][i] = as11;
 			matrizAS[3][1] = as2;
 			matrizAS[3][2] = as2;
-			matrizAS[3][12] = as2;
-			matrizAS[3][15] = as2;
+			matrizAS[3][13] = as7;
+			matrizAS[3][16] = as2;
 
 		// estado 4
 		for (int i = 0; i <= 25; i++)
 			matrizAS[4][i] = as11;
-			matrizAS[4][13] = as5;
+			matrizAS[4][14] = as13;
 
 		// estado 5
 		for (int i = 0; i <= 25; i++)
@@ -204,9 +204,9 @@ public class AnalizadorLexico {
 
 		// estado 6
 		for (int i = 0; i <= 25; i++)
-			matrizAS[6][i] = as6;
-			matrizAS[6][0] = as2;
-			matrizAS[6][1] = as5;
+			matrizAS[6][i] = as3;
+			matrizAS[6][1] = as2;
+			matrizAS[6][2] = as2;
 
 		// estado 7
 		for (int i = 0; i <= 25; i++)
@@ -254,7 +254,7 @@ public class AnalizadorLexico {
 		// comprueba que llegue una letra
 		if ((caracter >= 65 && caracter <= 90)
 				|| (caracter >= 97 && caracter <= 122))
-			if ((caracter != 'D') && (caracter != 'd')) // B o b se trata en
+			if ((caracter != 'D') && (caracter != 'd') && (caracter != 'i')) // B o b se trata en
 														// otra columna
 				return 0; // Retorna columna de letras
 		if (caracter >= 48 && caracter <= 57)
