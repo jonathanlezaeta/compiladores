@@ -37,7 +37,7 @@ public class As13 extends AccionesSemantica { // Empaqueta el token controlando 
 		else {
 			ms.error(al.getNroLinea(), al.getMensaje(20), "LEXICO"); 
 		}
-		token.noSeAgregoCaracterLeido();
+		token.seAgregoCaracterLeido();
 		return token;
 	}
 }

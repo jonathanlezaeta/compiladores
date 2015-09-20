@@ -16,7 +16,6 @@ public class As6 extends AccionesSemantica { //  Empaqueta el token sin adiciona
         ms = m;
         al = a;
         simbolos = new Hashtable<String, Short>(); 
-        simbolos.put("[", new Short((short)'['));
         simbolos.put("<", COMPARADOR);
         simbolos.put(">", COMPARADOR);
         simbolos.put("=", ASIGNACION);
