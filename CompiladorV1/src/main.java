@@ -27,6 +27,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class main implements Mensajes{
 	  private Display d;
@@ -36,8 +40,10 @@ public class main implements Mensajes{
 	  private Table table;
 	  private Text text;
 	  private Text text_1;
+	  private AnalizadorLexico anlLexico;
 	  
 	  main() {
+		this.anlLexico = new AnalizadorLexico("", this);
 	    d = new Display();
 	    s = new Shell(d);
 	    s.setMinimumSize(new Point(800, 600));
@@ -102,9 +108,22 @@ public class main implements Mensajes{
 	    Button btnCompilar = new Button(s, SWT.NONE);
 	    btnCompilar.setBounds(699, 506, 75, 25);
 	    btnCompilar.setText("Compilar");
-	    
-	    TabFolder tabFolder = new TabFolder(s, SWT.NONE);
+	    /*Comienzan la interfaz grafica de las subpestañas y el al seleccionar una u otra*/
+	    final TabFolder tabFolder = new TabFolder(s, SWT.NONE);    
+	    tabFolder.addSelectionListener(new SelectionAdapter() {
+	    	@Override
+	    	public void widgetSelected(SelectionEvent arg0) {
+	    		if(tabFolder.getSelectionIndex() == 1){
+	    			table.removeAll();
+	    			tablaDeSimbolos();
+	    		}
+	    	}
+	    });
+
 	    tabFolder.setBounds(10, 10, 764, 478);
+	    
+
+
 	    
 	    TabItem tbtmCodigoFuente = new TabItem(tabFolder, SWT.NONE);
 	    tbtmCodigoFuente.setText("Codigo Fuente");
@@ -176,10 +195,10 @@ public class main implements Mensajes{
 	//------------------------------------------------------------Fin interfaz grafica------------------------------------------------------------	  
 	  
 	  protected void analizar(String codigoFuente) {
-		  AnalizadorLexico anlLexico = new AnalizadorLexico(codigoFuente, this);
 		  System.out.println(codigoFuente);
+		  anlLexico.setCodigoFuente(codigoFuente);
 		  for (int i = 0; i < codigoFuente.length(); i++) {
-			  System.out.println(anlLexico.yylex());
+			  System.out.println(anlLexico.yylex());			 
 		  }
 //	        Parser analizadorSintactico = new Parser();
 //	        analizadorSintactico.setLexico(anlLexico);
@@ -194,27 +213,48 @@ public class main implements Mensajes{
 	  
 	//-----------------------------------------------Implementacion metodos de la interfaz Mensaje------------------------------------------------
 	public void tablaDeSimbolos() {
-		// TODO Auto-generated method stub
+		Hashtable<String,EntradaTS> aux = this.anlLexico.getTablaDeSimbolos().getTabla(); 
+		Enumeration<EntradaTS> e = aux.elements();
+		while (e.hasMoreElements()){
+	            EntradaTS entrada = e.nextElement();
+	            for (int i = 0; i < entrada.getContRef(); i++)
+	            {   
+	            	TableItem item = new TableItem(table, SWT.NULL);
+	            	item.setText(0,entrada.getLexema());
+	            	item.setText(1,this.getName(entrada.getId()));
+	            }
+		}
+	}
+	
+	private String getName(Short id) { 
+		   switch(id){
+        case 264: return "Identificador";
+        case 265: return "Constante";
+        case 267: return "Cadena de caracteres";
+        case 274: return "Constante Entera";
+        default: return null;
+    }
+	}
+
+	public void token(int nroLinea, String lexema) { // muestra los token a medida que se reconocen 
+		//textoToken.append("Línea " + nroLinea + ": " + lexema + "\n");
 		
 	}
+
+
+	public void warning(String warning) { // muestra los warning
+		//textoWarning.append(warning + "\n");
+		
+	}
+	
+	public void estructuraSintactica(int linea, String estructura) { // Muestra la estructura sintactica
+		//textoEstrSin.append("Línea " + linea + ": " + estructura + "\n");
+		
+	}
+
 
 	public void error(int nroLinea, String mensaje, String string) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void token(int nroLinea, String lexema) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void warning(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void estructuraSintactica(int linea, String estructura) {
-		// TODO Auto-generated method stub
-		
-	}  
 }
