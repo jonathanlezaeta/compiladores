@@ -18,22 +18,19 @@ public class As13 extends AccionesSemantica { // Empaqueta el token controlando 
 
 	@Override
 	public Token ejecutar(Token token, char caracter) {
-		
-		token.setId(CTEENTERO);
 		String aux = token.getLexema().replace("_","");
 		Double e = Double.valueOf(aux);
 		token.setLexema(aux);
+		token.setId(CTEENTERO);
 		if(e> Short.MIN_VALUE && e< Short.MAX_VALUE ) { 
 			if(ts.contieneLexema(token.getLexema())) {
 				ts.getEntradaTS(token.getLexema()).incrementarCont();
 				token.setEntradaTS(ts.getEntradaTS(token.getLexema()));
 			}
 			else {
-				token.setId(CTEENTERO);
 				ts.addETS(token.getLexema(), token.getETS());
 				ts.getEntradaTS(token.getLexema()).setTipo("int");
 			}
-			
 		}
 		else {
 			ms.error(al.getNroLinea(), al.getMensaje(20), "LEXICO"); 

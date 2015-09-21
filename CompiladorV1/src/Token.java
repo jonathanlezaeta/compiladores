@@ -7,8 +7,7 @@ public class Token {
     public static final Short ID = 264;
     public static final Short CONSTANTE = 265;
     public static final Short STRING = 267;
-    public static final Short CTEENTERO = 274;
-    
+    public static final Short CTEENTERO = 271;    
     //Simbolos que forman el token
     private String lexema;
     private boolean seAgregoCaracter; // me dice si el ultimo caracter fue agregado al token 
