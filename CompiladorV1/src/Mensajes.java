@@ -10,5 +10,5 @@ public interface Mensajes {
 	
 	public void warning(String string) ;
 		
-	 public void estructuraSintactica(int linea, String estructura);
+    public void estructuraSintactica(int linea, String estructura);
 }

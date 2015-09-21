@@ -15,12 +15,16 @@ public class AnalizadorLexico {
 			as10, as11, as12, as13; // acciones semanticas
 	private boolean eof; // booleana que indica si se lleg� al final del archivo
 	private boolean fin;
-		 // | c | d | "d"-"D" | @ | + | - | / | * | > | < | = | ( | ) | _ | i | { | } | " | . | , | ; | otro | /n | tab | EOF
+		 // | c | d | "d"-"D" | @ | + | - | / | * | > | < | = | (  | ) | _ | i | { | } | " | . | , | ; | otro | /n | tab | EOF
+		//	  0   1       2     3   4   5   6   7   8   9   10  11  12  13  14   15  16  17  18  19  20   21    22    23    24    25
+	//        l	  d	  "D" "d"	@	+	-	/	*	>	<	=	(	)	 _	 i	 "	 .	 ,	 {	 }	" "	   ;    otro   /n	 tab	EOF
+
 	private int[][] matrizEstados = {
-			{ 1, 3, 1, 2,-1,14,-1,-1,10,10,10,-1,-1,-1, 1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
-			{ 1, 1, 1, 2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 1
-			{ 1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 2
-			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
+//			  0  1  2  3  4  5  6  7  8 9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+			{ 1, 3, 1, 2,-1,13,-1,-1,10,10,10,-1,-1,-1,1,11, 5,-1,-1,-1, 0,-1,-1, 0, 0, 0 },	// estado 0
+			{ 1, 1, 1, 2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 1
+			{ 1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 2
+			{-1, 3, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 4,-1,-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 3
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },   // estado 4
 			{-1, 6,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 5
 			{-1, 6, 7,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 6
@@ -33,24 +37,21 @@ public class AnalizadorLexico {
 			{-1,-1,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
 			{14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14, 0,14,14 },}; // estado 14
 	
-
-//		    1	3	1	2	f	14	f	f	10	10	10	f	f	f	f	11	5	f	f	f	0	f	f	0	0	0  ESTADO 0
-//	        1	1	1	2	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 1
-//	        1	f	1	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 2
-//          f	3	7	f	f	f	f	f	f	f	f	f	f	4	f	f	6	f	f	f	f	f	f	f	f	f  ESTADO 3
-//		    f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 4
-//			f	6	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 5
-//			f	6	7	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 6	
-//			f	9	f	f	8	8	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 7	
-//			f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 8	
-//			f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 9
-//			f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 10 
-//			11	11	11	11	11	11	11	11	11	11	11	11	11	11	11	13	11	11	11	11	11	11	11	12	11	11 ESTADO 11
-//			f	f	f	f	f	11	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 12
-//			f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 13
-//			f	f	f	f	f	15	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f  ESTADO 14 	
-//			15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	15	0	15	15 ESTADO 15
-
+	//	1	3	1	2	f	13	f	f	10	10	10	f	f	f	1	11	5	f	f	f	0	f	f	0	0	0
+	//	1	1	1	2	f	f	f	f	f	f	f	f	f	f	1	f	f	f	f	f	f	f	f	f	f	f
+	//	1	f	1	f	f	f	f	f	f	f	f	f	f	f	1	f	f	f	f	f	f	f	f	f	f	f
+	//	f	3	7	f	f	f	f	f	f	f	f	f	f	4	f	f	6	f	f	f	f	f	f	f	f	f
+	//	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	6	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	6	7	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	9	f	f	8	8	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	9	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	11	11	11	11	11	11	11	11	11	11	11	11	11	11	11	0	11	11	11	11	11	11	11	12	11	11
+	//	f	f	f	f	f	11	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	f	f	f	f	f	14	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f
+	//	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	14	0	14	14
 	
 	
 	private AccionesSemantica[][] matrizAS;
@@ -82,13 +83,14 @@ public class AnalizadorLexico {
 				System.out.println(caracter);
 				simbolo = getColumna(caracter);
 			}
-			
 			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
 			if (!token.consumioCaracter())
 				posicion--;
 			if (caracter == '\n' && token.consumioCaracter())
 				nroLinea++;
 			posicion++;
+			
+			System.out.println("ESTADO NUEVO: " + matrizEstados[estado][simbolo]);
 			estado = matrizEstados[estado][simbolo];			
 		}
 		if(estado != -1){
@@ -101,6 +103,8 @@ public class AnalizadorLexico {
 			if (eof && fin) // Cuando llegamos al final del archivo
 				return 0; // Luego de devolver el "FIN" devolvemos el "0"
 		}
+		
+		System.out.println("VALOR TOKEN: " + token.getId().intValue());
 		return token.getId().intValue();
 	}
 
@@ -149,7 +153,7 @@ public class AnalizadorLexico {
 			matrizAS[0][2] = as1;
 			matrizAS[0][3] = as1;
 			matrizAS[0][4] = as8;
-			matrizAS[0][5] = as7;
+			matrizAS[0][5] = as1;
 			matrizAS[0][6] = as8;
 			matrizAS[0][7] = as8;
 			matrizAS[0][8] = as1;
@@ -157,12 +161,12 @@ public class AnalizadorLexico {
 			matrizAS[0][10] = as1;
 			matrizAS[0][11] = as8;
 			matrizAS[0][12] = as8;
-			matrizAS[0][14] = as1;
-			matrizAS[0][15] = as1;
-			matrizAS[0][16] = as8;
+			matrizAS[0][14] = as1;			
+			matrizAS[0][15] = as7;
+			matrizAS[0][16] = as1;
 			matrizAS[0][17] = as8;
-			matrizAS[0][18] = as7;
-			matrizAS[0][19] = as7;
+			matrizAS[0][18] = as8;
+			matrizAS[0][19] = as8;
 			matrizAS[0][20] = as7;
 			matrizAS[0][21] = as8;
 			matrizAS[0][23] = as7;
@@ -177,19 +181,21 @@ public class AnalizadorLexico {
 			matrizAS[1][1] = as2;
 			matrizAS[1][2] = as2;
 			matrizAS[1][3] = as2;
+			matrizAS[1][14] = as2;
 			
 		// estado 2
 		for (int i = 0; i <= 25; i++)
 			matrizAS[2][i] = as11;
 			matrizAS[2][0] = as2;
 			matrizAS[2][2] = as2;
+			matrizAS[2][14] = as2;
 
 		// estado 3
 		for (int i = 0; i <= 25; i++)
 			matrizAS[3][i] = as11;
 			matrizAS[3][1] = as2;
 			matrizAS[3][2] = as2;
-			matrizAS[3][13] = as7;
+			matrizAS[3][13] = as2;
 			matrizAS[3][16] = as2;
 
 		// estado 4
@@ -211,6 +217,7 @@ public class AnalizadorLexico {
 		// estado 7
 		for (int i = 0; i <= 25; i++)
 			matrizAS[7][i] = as11;
+			matrizAS[7][1] = as2;
 			matrizAS[7][4] = as2;
 			matrizAS[7][5] = as2;
 
@@ -226,7 +233,7 @@ public class AnalizadorLexico {
 
 		// estado 10
 		for (int i = 0; i <= 25; i++)
-			matrizAS[10][i] = as6	;
+			matrizAS[10][i] = as6;
 			matrizAS[10][20] = as6;
 
 		// estado 11
@@ -240,7 +247,8 @@ public class AnalizadorLexico {
 
 		// estado 13
 		for (int i = 0; i <= 25; i++)
-			matrizAS[13][i] = as7;
+			matrizAS[13][i] = as6;
+			matrizAS[13][5] = as2;
 				
 		// estado 14
 		for (int i = 0; i <= 25; i++)
@@ -390,4 +398,8 @@ public class AnalizadorLexico {
 		return null;
 	}
 
+	void setCodigoFuente(String codigoFuente){
+		this.codFuente = codigoFuente;
+	}
+	
 }
