@@ -376,18 +376,20 @@ public class AnalizadorLexico {
 		case 34:
 			return "Sentencia de impresi?n de caracteres";
 		case 35:
-			return "Bloque de sentencias";
+			return "Finaliza bloque de sentencias";
 		case 36:
 			return "Sentencia simple";
 		case 37:
 			return "Sentencia de conversión";
 		case 38:
 			return "Ámbito declarado en bloque";
+		/* CONTINUACION DE ERRORES */
 		case 39:
 			return "Falta abrir llaves '{'";
 		case 40:
 			return "Falta cerrar llaves '}'";
-
+		case 41:
+			return "Falta coma en la lista de variables.";
 		}
 		return null;
 	}

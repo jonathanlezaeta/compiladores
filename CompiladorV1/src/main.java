@@ -53,11 +53,14 @@ public class main implements Mensajes {
 	private String warningParaMostrar;
 	private String tokenAmostrar;
 	private Text tokenText;
+	private Text accionesSintacticasText;
+	private String accionesSitacticasMostrar;
 	
 	main() {
 		this.anlLexico = new AnalizadorLexico("", this);
 		this.erroresParaMostrar = "";
 		this.warningParaMostrar = "";
+		this.accionesSitacticasMostrar = "";
 		this.tokenAmostrar = "";
 		d = new Display();
 		s = new Shell(d);
@@ -145,7 +148,10 @@ public class main implements Mensajes {
 					tokenText.setText("");
 					tokenText.setText(tokenAmostrar);
 				}
-				
+				if (tabFolder.getSelectionIndex() == 5){
+					accionesSintacticasText.setText("");
+					accionesSintacticasText.setText(accionesSitacticasMostrar);					
+				}
 			}
 		});
 		tabFolder.setBounds(10, 10, 764, 478);
@@ -208,6 +214,13 @@ public class main implements Mensajes {
 		
 		tokenText = new Text(tabFolder, SWT.BORDER | SWT.READ_ONLY | SWT.MULTI);
 		tbtmTokens.setControl(tokenText);
+		
+		TabItem tbtmAccionesSintacticas = new TabItem(tabFolder, SWT.NONE);
+		tbtmAccionesSintacticas.setText("Acciones Sintacticas");
+		
+		accionesSintacticasText = new Text(tabFolder, SWT.BORDER | SWT.READ_ONLY | SWT.MULTI);
+		accionesSintacticasText.setEditable(true);
+		tbtmAccionesSintacticas.setControl(accionesSintacticasText);
 
 		// Metodo que se ejecuta al precionar el boton
 		btnCompilar.addSelectionListener(new SelectionAdapter() {
@@ -292,8 +305,7 @@ public class main implements Mensajes {
 																		// la
 																		// estructura
 																		// sintactica
-		// textoEstrSin.append("Línea " + linea + ": " + estructura + "\n");
-
+		accionesSitacticasMostrar = accionesSitacticasMostrar + "Línea " + linea + ": " + estructura + "\n";
 	}
 
 	public void error(int nroLinea, String error, String tipo) { // muestra los
