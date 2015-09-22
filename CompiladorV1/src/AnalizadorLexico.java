@@ -32,7 +32,7 @@ public class AnalizadorLexico {
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 8
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 9
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 10
-			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11, 0,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
+			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,-1,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
 			{-1,-1,-1,-1,-1,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 12
 			{-1,-1,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
 			{14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14, 0,14,14 },}; // estado 14
@@ -80,7 +80,7 @@ public class AnalizadorLexico {
 			    simbolo = getColumna(caracter);
 			}else{
 			    caracter = codFuente.charAt(posicion);
-				System.out.println(caracter);
+				//System.out.println(caracter);
 				simbolo = getColumna(caracter);
 			}
 			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
@@ -93,7 +93,6 @@ public class AnalizadorLexico {
 			estado = matrizEstados[estado][simbolo];			
 		}
 		if(estado != -1){
-			System.out.println("PUTO");
 			if (eof && !fin) { // Cuando llegamos al final del archivo
 				msj.tablaDeSimbolos();
 				fin = true;
@@ -238,8 +237,10 @@ public class AnalizadorLexico {
 
 		// estado 11
 		for (int i = 0; i <= 25; i++)
-			matrizAS[11][i] = as7;
-
+			matrizAS[11][i] = as2;
+			matrizAS[11][5] = as7;
+			matrizAS[11][15] = as9;
+			
 		// estado 12
 		for (int i = 0; i <= 25; i++)
 			matrizAS[12][i] = as11;
@@ -324,72 +325,71 @@ public class AnalizadorLexico {
 		case 1:
 			return "Constante double fuera del rango permitido";
 		case 2:
-			return "Car?cter no identificado";
+			return "Caracter no identificado";
 		case 3:
-			return "Construcci?n de token err?neo";
+			return "Construccion de token erroneo";
 		case 20:
 			return "Constante entero fuera de rango permitido";
 
 			// ERRORES SINTACTICOS
 		case 4:
-			return "No se encontr? el fin de archivo";
-		case 5:
 			return "Falta el bloque de sentencias ejecutables";
-		case 6:
+		case 5:
 			return "Falta el bloque de sentencias declarativas";
-		case 7:
+		case 6:
 			return "Se esperaba un ';'";
 		case 8:
-			return "Falta el tipo de la declaraci?n";
+			return "Falta el tipo de la declaracion";
 		case 9:
 			return "Sentencia declarativa incorrecta";
-		case 11:
-			return "Falta el identificador de la asignaci?n";
-		case 12:
-			return "Falta el identificador de la asignaci?n y se esperaba un ';'";
+		case 10:
+			return "Falta el ID de la asignacion";
 		case 13:
 			return "Bloque de sentencias sin finalizar falta 'END'";
 		case 14:
 			return "Bloque de sentencias sin inicializar falta 'BEGIN'";
-		case 15:
-			return "Falta abrir par?ntesis '('";
 		case 16:
-			return "Falta cerrar par?ntesis ')'";
+			return "Falta abrir parentesis '('";
 		case 17:
-			return "Par?metro del imprimir incorrecto";
+			return "Falta cerrar parentesis ')'";
 		case 18:
-			return "Falta palabra reservada 'PRINT'";
+			return "Parametro a imprimir incorrecto";
 		case 19:
+			return "Sentencia de impresion mal declarada";
+		case 12:
 			return "Sentencia incorrecta";
-		case 21:
-			return "Sentencia incorrecta Falta palabra reservada 'ENDIF'";
+		case 15:
+			return "Se esperaba un comparador";
+		case 11:
+			return "Se esperaba la asignación =";
 
 			// ESTRUCTURAS SINTACTICAS
-		case 30:
-			return "Sentencia declarativa";
 		case 31:
-			return "Sentencia de asignaci?n";
+			return "Sentencia de declaracion";
 		case 32:
-			return "Sentencia de selecci?n";
+			return "Sentencia de asignacion";
 		case 33:
-			return "Sentencia de iteraci?n";
+			return "Sentencia de seleccion IF-THEN-ELSE";
 		case 34:
-			return "Sentencia de impresi?n de caracteres";
+			return "Sentencia de seleccion IF-THEN";
 		case 35:
-			return "Finaliza bloque de sentencias";
+			return "Bloque de sentencia simple";
 		case 36:
-			return "Sentencia simple";
+			return "Comparacion";
 		case 37:
-			return "Sentencia de conversión";
+			return "Sentencia de iteracion";
 		case 38:
-			return "Ámbito declarado en bloque";
-		/* CONTINUACION DE ERRORES */
+			return "Ámbito declarado";
 		case 39:
-			return "Falta abrir llaves '{'";
+			return "Sentencia de impresion de caracteres";
 		case 40:
-			return "Falta cerrar llaves '}'";
+			return "Sentencia de declaracion en ambito";
 		case 41:
-			return "Falta coma en la lista de variables.";
+			return "Sentencia de conversión";	
+		case 42:
+			return "Bloque de sentencias";
+		
+		
 		}
 		return null;
 	}
