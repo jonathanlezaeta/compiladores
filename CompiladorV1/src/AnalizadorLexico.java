@@ -32,9 +32,9 @@ public class AnalizadorLexico {
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 8
 			{-1, 9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 9
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 10
-			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11, 0,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
+			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,-1,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
 			{-1,-1,-1,-1,-1,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 12
-			{-1,3,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },		// estado 13
+			{-1,-1,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
 			{14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14, 0,14,14 },}; // estado 14
 	
 	//	1	3	1	2	f	13	f	f	10	10	10	f	f	f	1	11	5	f	f	f	0	f	f	0	0	0
@@ -80,7 +80,7 @@ public class AnalizadorLexico {
 			    simbolo = getColumna(caracter);
 			}else{
 			    caracter = codFuente.charAt(posicion);
-				System.out.println(caracter);
+				//System.out.println(caracter);
 				simbolo = getColumna(caracter);
 			}
 			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
@@ -89,8 +89,7 @@ public class AnalizadorLexico {
 			if (caracter == '\n' && token.consumioCaracter())
 				nroLinea++;
 			posicion++;
-			
-			System.out.println("ESTADO NUEVO: " + matrizEstados[estado][simbolo]);
+			//System.out.println("ESTADO NUEVO: " + matrizEstados[estado][simbolo]);
 			estado = matrizEstados[estado][simbolo];			
 		}
 		if(estado != -1){
@@ -234,12 +233,14 @@ public class AnalizadorLexico {
 		// estado 10
 		for (int i = 0; i <= 25; i++)
 			matrizAS[10][i] = as6;
-			matrizAS[10][20] = as6;
+			matrizAS[10][10] = as5;
 
 		// estado 11
 		for (int i = 0; i <= 25; i++)
-			matrizAS[11][i] = as7;
-
+			matrizAS[11][i] = as2;
+			matrizAS[11][5] = as7;
+			matrizAS[11][15] = as9;
+			
 		// estado 12
 		for (int i = 0; i <= 25; i++)
 			matrizAS[12][i] = as11;
@@ -249,9 +250,7 @@ public class AnalizadorLexico {
 		for (int i = 0; i <= 25; i++)
 			matrizAS[13][i] = as6;
 			matrizAS[13][5] = as2;
-			matrizAS[13][1] = as2;
-			matrizAS[13][16] = as2;
-		
+				
 		// estado 14
 		for (int i = 0; i <= 25; i++)
 			matrizAS[14][i] = as7;
@@ -309,11 +308,11 @@ public class AnalizadorLexico {
 			return 20; // ESPACIO BLANCO 
 		if (caracter == ';')
 			return 21;	
-		if (caracter == '\n')
+		if (caracter == '\n' || caracter == '\r')
 			return 23;			
 		if (caracter == 9)
 			return 24;					
-		if (caracter == 255) {
+		if (caracter == 255 || caracter == 160 ) {
 			eof = true;
 			return 25; // FIN DE ARCHIVO
 		}
@@ -326,76 +325,71 @@ public class AnalizadorLexico {
 		case 1:
 			return "Constante double fuera del rango permitido";
 		case 2:
-			return "Car�cter no identificado";
+			return "Caracter no identificado";
 		case 3:
-			return "Construcci�n de token err�neo";
+			return "Construccion de token erroneo";
 		case 20:
 			return "Constante entero fuera de rango permitido";
 
 			// ERRORES SINTACTICOS
 		case 4:
-			return "No se encontr� el fin de archivo";
-		case 5:
 			return "Falta el bloque de sentencias ejecutables";
-		case 6:
+		case 5:
 			return "Falta el bloque de sentencias declarativas";
-		case 7:
+		case 6:
 			return "Se esperaba un ';'";
 		case 8:
-			return "Falta el tipo de la declaraci�n";
+			return "Falta el tipo de la declaracion";
 		case 9:
 			return "Sentencia declarativa incorrecta";
-		case 11:
-			return "Falta el identificador de la asignaci�n";
-		case 12:
-			return "Falta el identificador de la asignaci�n y se esperaba un ';'";
+		case 10:
+			return "Falta el ID de la asignacion";
 		case 13:
-			return "Bloque de sentencias sin finalizar falta '}'";
+			return "Bloque de sentencias sin finalizar falta 'END'";
 		case 14:
-			return "Bloque de sentencias sin inicializar falta '{'";
-		case 15:
-			return "Falta abrir par�ntesis '('";
+			return "Bloque de sentencias sin inicializar falta 'BEGIN'";
 		case 16:
-			return "Falta cerrar par�ntesis ')'";
+			return "Falta abrir parentesis '('";
 		case 17:
-			return "Par�metro del imprimir incorrecto";
+			return "Falta cerrar parentesis ')'";
 		case 18:
-			return "Falta palabra reservada 'imprimir'";
+			return "Parametro a imprimir incorrecto";
 		case 19:
+			return "Sentencia de impresion mal declarada";
+		case 12:
 			return "Sentencia incorrecta";
+		case 15:
+			return "Se esperaba un comparador";
+		case 11:
+			return "Se esperaba la asignación =";
 
 			// ESTRUCTURAS SINTACTICAS
-		case 30:
-			return "Sentencia declarativa";
 		case 31:
-			return "Sentencia de asignaci�n";
+			return "Sentencia de declaracion";
 		case 32:
-			return "Sentencia de selecci�n";
+			return "Sentencia de asignacion";
 		case 33:
-			return "Sentencia de iteraci�n";
+			return "Sentencia de seleccion IF-THEN-ELSE";
 		case 34:
-			return "Sentencia de impresi�n de caracteres";
+			return "Sentencia de seleccion IF-THEN";
 		case 35:
-			return "Bloque de sentencias";
+			return "Bloque de sentencia simple";
+		case 36:
+			return "Comparacion";
 		case 37:
-			return "Sentencia declaracion de vector";
+			return "Sentencia de iteracion";
 		case 38:
-			return "Falta abrir corchetes '['";
+			return "Ámbito declarado";
 		case 39:
-			return "Falta cerrar corchetes ']'";
+			return "Sentencia de impresion de caracteres";
 		case 40:
-			return "Falta declarar los dos puntos ..";
+			return "Sentencia de declaracion en ambito";
 		case 41:
-			return "Falta agregar el tipo";
+			return "Sentencia de conversión";	
 		case 42:
-			return "Falta agregar el tipo 'vector'";
-		case 43:
-			return "Asignacion de vector";
-		case 44:
-			return "Falta agregar la expresion en la asignacion del vector";
-		case 45:
-			return "Error en el token de asgnacion se espera un ':='";
-
+			return "Bloque de sentencias";
+		
+		
 		}
 		return null;
 	}

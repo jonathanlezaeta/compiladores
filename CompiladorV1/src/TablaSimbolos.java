@@ -13,19 +13,19 @@ public class TablaSimbolos {
     public TablaSimbolos(){
         palReservadas = new Vector<String>();
         lexemas = new Hashtable <String,EntradaTS>();
-        palReservadas.addElement("if");
-        palReservadas.addElement("then");
-        palReservadas.addElement("else");
-        palReservadas.addElement("print");
-        palReservadas.addElement("double");
-        palReservadas.addElement("endif");
-        palReservadas.addElement("begin");
-        palReservadas.addElement("end");
-        palReservadas.addElement("loop");
-        palReservadas.addElement("until");
-        palReservadas.addElement("int");
-        palReservadas.addElement("todouble");
-        palReservadas.addElement("my");
+        palReservadas.addElement("IF");
+        palReservadas.addElement("THEN");
+        palReservadas.addElement("ELSE");
+        palReservadas.addElement("PRINT");
+        palReservadas.addElement("DOUBLE");
+        palReservadas.addElement("ENDIF");
+        palReservadas.addElement("BEGIN");
+        palReservadas.addElement("END");
+        palReservadas.addElement("LOOP");
+        palReservadas.addElement("UNTIL");
+        palReservadas.addElement("INT");
+        palReservadas.addElement("TODOUBLE");
+        palReservadas.addElement("MY");
     }
     
 

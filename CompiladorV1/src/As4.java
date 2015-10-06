@@ -38,19 +38,19 @@ public class As4 extends AccionesSemantica{ // Empaqueta el token controlando la
         ms = m;
         al = a;
         palabrasReservadas = new Hashtable<String, Short>();
-        palabrasReservadas.put("if", IF); 
-        palabrasReservadas.put("then", THEN);
-        palabrasReservadas.put("else", ELSE);
-        palabrasReservadas.put("print", PRINT);
-        palabrasReservadas.put("double", DOUBLE);
-        palabrasReservadas.put("begin", BEGIN);       
-        palabrasReservadas.put("end", END);
-        palabrasReservadas.put("endif", ENDIF);
-        palabrasReservadas.put("int", INT);
-        palabrasReservadas.put("todouble", TODOUBLE);
-        palabrasReservadas.put("my", MY);
-        palabrasReservadas.put("loop", LOOP);
-        palabrasReservadas.put("until", UNTIL);
+        palabrasReservadas.put("IF", IF); 
+        palabrasReservadas.put("THEN", THEN);
+        palabrasReservadas.put("ELSE", ELSE);
+        palabrasReservadas.put("PRINT", PRINT);
+        palabrasReservadas.put("DOUBLE", DOUBLE);
+        palabrasReservadas.put("BEGIN", BEGIN);       
+        palabrasReservadas.put("END", END);
+        palabrasReservadas.put("ENDIF", ENDIF);
+        palabrasReservadas.put("INT", INT);
+        palabrasReservadas.put("TODOUBLE", TODOUBLE);
+        palabrasReservadas.put("MY", MY);
+        palabrasReservadas.put("LOOP", LOOP);
+        palabrasReservadas.put("UNTIL", UNTIL);
       
     }
 

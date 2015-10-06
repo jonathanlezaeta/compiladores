@@ -13,7 +13,7 @@ public class As11 extends AccionesSemantica { // Vac�a el token e informa erro
 	public Token ejecutar(Token token, char c) {
 		token = new Token();
 		int aux = entrada(c); // me dice el tipo de mensaje
-		if (aux == 25) {
+		if (aux == 25 || aux == 22) {
 			token.seAgregoCaracterLeido();
 			ms.error(al.getNroLinea(), al.getMensaje(2), "LEXICO");
 		} else
