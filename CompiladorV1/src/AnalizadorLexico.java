@@ -13,7 +13,7 @@ public class AnalizadorLexico {
 	private int posicion; // posicion en el codigo fuente
 	private AccionesSemantica as1, as2, as3, as4, as5, as6, as7, as8, as9,
 			as10, as11, as12, as13; // acciones semanticas
-	private boolean eof; // booleana que indica si se lleg� al final del archivo
+	private boolean eof; // booleana que indica si se llegï¿½ al final del archivo
 	private boolean fin;
 		 // | c | d | "d"-"D" | @ | + | - | / | * | > | < | = | (  | ) | _ | i | { | } | " | . | , | ; | otro | /n | tab | EOF
 		//	  0   1       2     3   4   5   6   7   8   9   10  11  12  13  14   15  16  17  18  19  20   21    22    23    24    25
@@ -34,7 +34,7 @@ public class AnalizadorLexico {
 			{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 10
 			{11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,-1,11,11,11,11,11,11,11,12,11,11 }, 	// estado 11
 			{-1,-1,-1,-1,-1,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 }, 	// estado 12
-			{-1,-1,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },	// estado 13
+			{-1,3,-1,-1,-1,14,-1,-1,-1,-1,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },		// estado 13
 			{14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14, 0,14,14 },}; // estado 14
 	
 	//	1	3	1	2	f	13	f	f	10	10	10	f	f	f	1	11	5	f	f	f	0	f	f	0	0	0
@@ -84,11 +84,10 @@ public class AnalizadorLexico {
 				simbolo = getColumna(caracter);
 			}
 			token = (matrizAS[estado][simbolo]).ejecutar(token, caracter);
-			if (!token.consumioCaracter())
-				posicion--;
+			if (token.consumioCaracter())
+				posicion++;
 			if (caracter == '\n' && token.consumioCaracter())
 				nroLinea++;
-			posicion++;
 			//System.out.println("ESTADO NUEVO: " + matrizEstados[estado][simbolo]);
 			estado = matrizEstados[estado][simbolo];			
 		}
@@ -107,12 +106,12 @@ public class AnalizadorLexico {
 		return token.getId().intValue();
 	}
 
-	// retrocede la posici�n para releer un caracter
+	// retrocede la posiciï¿½n para releer un caracter
 	public void releerCaracter() {
 		posicion--;
 	}
 
-	// devuelve el n�mero de l�nea actual
+	// devuelve el nï¿½mero de lï¿½nea actual
 	public int getNroLinea() {
 		return this.nroLinea;
 	}
@@ -250,6 +249,8 @@ public class AnalizadorLexico {
 		for (int i = 0; i <= 25; i++)
 			matrizAS[13][i] = as6;
 			matrizAS[13][5] = as2;
+			matrizAS[13][1] = as2;
+			matrizAS[13][16] = as2;
 				
 		// estado 14
 		for (int i = 0; i <= 25; i++)
@@ -257,7 +258,7 @@ public class AnalizadorLexico {
 				
 	}
 
-	private int getColumna(int caracter) { // obtiene la columna en la que est�
+	private int getColumna(int caracter) { // obtiene la columna en la que estï¿½
 											// cada caracter en la matriz de
 											// estados
 		// comprueba que llegue una letra
@@ -361,7 +362,7 @@ public class AnalizadorLexico {
 		case 15:
 			return "Se esperaba un comparador";
 		case 11:
-			return "Se esperaba la asignación =";
+			return "Se esperaba la asignaciÃ³n =";
 
 			// ESTRUCTURAS SINTACTICAS
 		case 31:
@@ -379,13 +380,13 @@ public class AnalizadorLexico {
 		case 37:
 			return "Sentencia de iteracion";
 		case 38:
-			return "Ámbito declarado";
+			return "Ã�mbito declarado";
 		case 39:
 			return "Sentencia de impresion de caracteres";
 		case 40:
 			return "Sentencia de declaracion en ambito";
 		case 41:
-			return "Sentencia de conversión";	
+			return "Sentencia de conversiÃ³n";	
 		case 42:
 			return "Bloque de sentencias";
 		

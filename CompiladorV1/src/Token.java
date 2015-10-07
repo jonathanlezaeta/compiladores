@@ -21,7 +21,7 @@ public class Token {
         seAgregoCaracter = false;
         contadorDeReferencia = 1;
         entrada=null;
-        id = 0;
+        id = 300;
         tipo = null;
     }
 
